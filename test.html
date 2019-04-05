@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>validacao de bi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <input id="new" autocomplete="off" onchange="validarCC()"">
+        <button>Verificar</button> 
+        <button id="next">Next</button>
+        <img id="image" src="cc.png">
+    </div>
+    <img class="bg" src="affect.png">
+<script>
+        var o = document.getElementById("next")
+        o.style.display = "none";
+
+        //var im = document.getElementById("image")
+        //im.style.display = "none";
+        
+        
+    function validarCC() {
+        //capturar o valor do input
+        var x =  document.getElementById("new").value;
+        console.log(x);
+        //alert(x);
+
+        //*****************************************************************************************
+        //divir os digitos da string dada pelo input
+        var arrayOfStrings = document.getElementById("new").value;
+        var res = arrayOfStrings.split("");
+        //document.getElementById("demo").innerHTML = res;
+        console.log(res);
+        //*****************************************************************************************
+        //soma de todos os digitos menos o ultimo da array
+        
+        var soma = 0;
+        for (i = 0; i < res.length - 1; i++){
+            soma+=Number(res[i]);
+        }
+        console.log(soma);
+        //*****************************************************************************************
+        //isolar o ultimo numero da array
+        var ultimo = res[res.length - 1];
+        console.log(ultimo);
+
+        //isolar o ultimo digito da soma com a propriedade de resto
+        var numC = 0;
+        numC = soma % 10;
+        console.log(numC);
+        //*****************************************************************************************
+        //se o ultimo digito da array for igual ao ultimo digito da soma:
+        if (ultimo == numC) {
+            console.log("Valido");
+            o.style.display = "inline";
+            swal({
+                title: "Valido!",
+                icon: "success",
+                closeOnClickOutside: false,
+                timer: 2000,
+                buttons: false,
+                text: "!!",
+            });
+
+        } else{
+            console.log("Invalido")
+            
+            o.style.display = "none";
+            swal({
+                title: "Invalido!",
+                text: "Tente novamente",
+                icon: "error",
+                closeOnClickOutside: false,
+                timer: 2000,
+                buttons: false,
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
